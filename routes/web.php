@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
@@ -30,5 +31,10 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/createPost', [PostController::class, 'index'])->name('createPost');
 Route::post('/posts', [PostController::class, 'store']);
 Route::get('/posts', [PostController::class, 'showPosts'])->name('posts');
+
+Route::post('/temp', [FileController::class, 'TempUpload'])->name('temp');
+Route::get('/download/{id}', [FileController::class, 'download'])->name('download');
+
+
 
 

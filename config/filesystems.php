@@ -37,7 +37,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public/files'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
@@ -51,6 +51,12 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+
+        'LocalFileStore' => 
+        [
+            'driver' => 'local',
+            'root' => "/home/admin/tmp/files",
+        ]
 
     ],
 

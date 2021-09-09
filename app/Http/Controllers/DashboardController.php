@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -14,7 +16,15 @@ class DashboardController extends Controller
 
     public function index()
     {
-        // dd(auth()->user()->posts);
-        return view('dashboard');
+        // $post_model = new Post();
+        $posts = Post::orderBy('created_at', 'DESC')->simplePaginate(5);
+        // dd($posts);
+
+        // foreach($posts as $post)
+        // {
+        //     dd($post->images[0]->id);
+        // }
+
+        return view('dashboard')->with(['posts' => $posts]);
     }
 }

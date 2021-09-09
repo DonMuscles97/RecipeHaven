@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>Blog</title>
@@ -23,13 +24,13 @@
           <ul class="navbar-nav ml-auto">
             @if (auth()->user())
             <li class="nav-item active">
-              <a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('posts')}}">Posts</a>
+              <a class="nav-link" href="{{route('posts')}}">My Recipes</a>
             </li>
             <li>
-                <a class="nav-link" href="{{route('createPost')}}">Create A Post</a>
+                <a class="nav-link" href="{{route('createPost')}}">Create A Recipe</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="logout" href="#">Logout</a>
@@ -71,7 +72,7 @@
 </style>
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
-  console.log($('.nav-link'))
+
  
   $('#logout').click(() => {
     $.ajax({
