@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         // $post_model = new Post();
-        $posts = Post::orderBy('created_at', 'DESC')->simplePaginate(5);
+        $posts = Post::orderBy('created_at', 'DESC')->limit(3)->get();
         // dd($posts);
 
         // foreach($posts as $post)
