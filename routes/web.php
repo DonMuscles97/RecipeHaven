@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -34,6 +35,11 @@ Route::get('/posts', [PostController::class, 'showPosts'])->name('posts');
 
 Route::post('/temp', [FileController::class, 'TempUpload'])->name('temp');
 Route::get('/download/{id}', [FileController::class, 'download'])->name('download');
+
+Route::get('/createCategory', [CategoryController::class, 'create'])->name('createCategory');
+Route::post('/createCategory', [CategoryController::class, 'store'])->name('createCategory');
+
+
 
 
 
