@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -18,7 +19,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = auth()->user()->categories;
+        // dd($categories);
+
+        return view('category.index')->with(['categories' => $categories]);
     }
 
     /**
@@ -39,7 +43,42 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+          
+            'category_name' => 'required',
+            'description' => 'required',
+            'uploads' => 'required'
+
+
+        ]);
+
+        $category = $request->user()->categories()->create([
+            'category_name' => $request->category_name,
+            'description'  => $request->description,
+            'user_id'   => \Auth::user()->id
+        ]);
+
+        
+
+        foreach(json_decode($request->uploads) as $upload){
+            
+            if (!empty(Storage::disk('public')->exists("{$upload->path}/{$upload->file_name}")))
+            {
+                // dd('here');
+                Storage::disk('public')->move("{$upload->path}/{$upload->file_name}", "category/{$category->id}/{$upload->file_name}");
+
+                    $category->path = "category/$category->id";
+                    $category->file_name = $upload->file_name;
+                    $category->file_type = \File::extension($upload->file_name);
+                    $category->save();
+                    
+
+                
+            }
+            
+        }
+
+        dd('done');
     }
 
     /**

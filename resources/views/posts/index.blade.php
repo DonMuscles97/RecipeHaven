@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container bg-white rounded pt-5  pb-2 col-md-10 col-lg-8 col-xl-8 col-xs-2 mx-auto" style="border: solid #49ac39 1px">
-    <h1 class="" style="color: #49ac39">Posts</h1>
+    <h1 class="" style="color: #49ac39">Create Recipe</h1>
 
     <form action="{{route('posts')}}" method="POST">
      @csrf
@@ -26,7 +26,7 @@
              </div>
          @enderror 
          </div>
-         <div id="upload" class="dropzone filedrop">
+         <div id="upload" class="dropzone filedrop @error('uploads') border border-danger @enderror">
             {{csrf_field()}}
             <div class="dz-default dz-message">
                 <div class="dz-icon">
@@ -41,6 +41,11 @@
                 <input name="temp" type="file" multiple>
             </div>
         </div>
+        @error('uploads')
+             <div class="text-danger mt-2">
+                 Please upload an Image
+             </div>
+         @enderror 
 
 
          <div class="form-group text-right">
@@ -62,7 +67,7 @@
 
  <script>
 
-console.log('this works')
+console.log($('#upload'))
 var upload_number = 0;
 var uploads = [];
 $("div#upload").dropzone({ 

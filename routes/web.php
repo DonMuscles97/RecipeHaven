@@ -36,8 +36,14 @@ Route::get('/posts', [PostController::class, 'showPosts'])->name('posts');
 Route::post('/temp', [FileController::class, 'TempUpload'])->name('temp');
 Route::get('/download/{id}', [FileController::class, 'download'])->name('download');
 
+Route::get('/categoryImage/{id}', [FileController::class, 'CategoryImage']);
+
 Route::get('/createCategory', [CategoryController::class, 'create'])->name('createCategory');
-Route::post('/createCategory', [CategoryController::class, 'store'])->name('createCategory');
+Route::post('/createCategory', [CategoryController::class, 'store']);
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+
+
 
 
 

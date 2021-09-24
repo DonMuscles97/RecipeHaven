@@ -11,9 +11,16 @@ class Category extends Model
 
     protected $fillable = [
         'category_name',
+        'description',
         'path',
         'file_name',
         'file_type', 
         'user_id'
     ];
+
+    public function user ()
+        {
+            return $this->belongsTo(User::class);
+        }
+
 }

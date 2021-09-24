@@ -26,7 +26,7 @@
              </div>
          @enderror 
          </div>
-         <div id="upload" class="dropzone filedrop">
+         <div id="upload" class="dropzone filedrop @error('uploads') border border-danger @enderror">
             {{csrf_field()}}
             <div class="dz-default dz-message">
                 <div class="dz-icon">
@@ -41,7 +41,11 @@
                 <input name="temp" type="file" multiple>
             </div>
         </div>
-
+        @error('uploads')
+             <div class="text-danger mt-2">
+                 <p>A picture is required to create Category</p>
+             </div>
+         @enderror 
 
          <div class="form-group text-right">
              <input type="text" id="file_input" style="display: none" name="uploads">

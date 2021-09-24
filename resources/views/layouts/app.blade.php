@@ -25,12 +25,17 @@
             @if (auth()->user())
             <li class="nav-item active">
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown03">
+                <a class="dropdown-item" href="{{route('createPost')}}">Create Recipe</a>
+                <a class="dropdown-item" href="{{route('createCategory')}}">Create Category</a>
+                <a class="dropdown-item" href="{{route('categories')}}">Categories</a>
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('posts')}}">My Recipes</a>
-            </li>
-            <li>
-                <a class="nav-link" href="{{route('createPost')}}">Create A Recipe</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="logout" href="#">Logout</a>
@@ -70,7 +75,7 @@
       border-radius: 10px !important;
     }
 </style>
-<script src="{{ asset('js/app.js') }}"></script>
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 <script>
 
  

@@ -57,4 +57,5 @@
         color: #49ac39
     }
 </style>
+<script src="{{ asset('js/app.js') }}"></script>   
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -21,11 +22,13 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // dd($this);
+        // dd($request);
         $this->validate($request, [
           
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'uploads' => 'required'
+
 
         ]);
 
@@ -37,15 +40,22 @@ class PostController extends Controller
         // dd();
 
         foreach(json_decode($request->uploads) as $upload){
-            // dd());
-            $post->images()->create([
-                'path' => $upload->path,
-                'file_name' => $upload->file_name,
-                'file_type' => \File::extension($upload->file_name),
-                'file_number' => $upload->file_number,
-                'user_id'   => \Auth::user()->id
+            
+            if (!empty(Storage::disk('public')->exists("{$upload->path}/{$upload->file_name}")))
+            {
+                // dd('here');
+                Storage::disk('public')->move("{$upload->path}/{$upload->file_name}", "posts/{$post->id}/{$upload->file_name}");
 
-            ]);
+                $post->images()->create([
+                    'path' => "posts/$post->id",
+                    'file_name' => $upload->file_name,
+                    'file_type' => \File::extension($upload->file_name),
+                    'file_number' => $upload->file_number,
+                    'user_id'   => \Auth::user()->id
+
+                ]);
+            }
+            
         }
         
 

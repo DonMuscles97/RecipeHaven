@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\File;
 use App\Models\PostImage;
 use Illuminate\Http\Request;
@@ -13,6 +14,31 @@ class FileController extends Controller
     public function download(Request $request, $id)
     {
         $file = PostImage::find($id);
+        // dd($file);
+
+        if(isset($file))
+        {
+            // check two file paths
+            // dd($file);
+            
+            if (Storage::disk('public')->exists("$file->path/$file->file_name")) 
+            {
+                // dd('we are here');
+                $localFileStorePath = "$file->path/$file->file_name";
+
+                $contents = Storage::disk('public')->get($localFileStorePath);
+
+                return Response::make($contents, 200, [
+                    'Content-Type' => "application/{$file->file_type}",
+                    'Content-Disposition' => 'inline; filename="'.basename($localFileStorePath).'"'
+                ]);
+            }          
+        }
+    }
+
+    public function CategoryImage(Request $request, $id)
+    {
+        $file = Category::find($id);
         // dd($file);
 
         if(isset($file))

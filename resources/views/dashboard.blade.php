@@ -209,4 +209,7 @@
 					}
 				})
     </script> --}}
+    <script>
+        console.log($('exampleModal'))
+    </script>
 @endsection
