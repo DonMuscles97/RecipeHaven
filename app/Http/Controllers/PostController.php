@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,9 +16,10 @@ class PostController extends Controller
 
     public function index()
     {
-        
+        $categories = Category::all();
+        // dd($categories);
        
-        return view('posts.index');
+        return view('posts.index')->with(['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -36,6 +38,18 @@ class PostController extends Controller
             'title' => $request->title,
             'body'  => $request->body,
         ]);
+
+        foreach($request->categories as $category)
+        {
+            // dd($category);
+            $post->categories()->attach($post->id, [
+                // 'post_id' => $post->id,
+                'category_id' => $category
+            ]);
+            // dd('done');
+        }
+
+        
 
         // dd();
 

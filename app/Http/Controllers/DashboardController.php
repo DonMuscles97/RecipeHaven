@@ -18,7 +18,7 @@ class DashboardController extends Controller
     {
         // $post_model = new Post();
         $posts = Post::orderBy('created_at', 'DESC')->limit(3)->get();
-        // dd($posts);
+        // dd($posts[0]->categories);
 
         // foreach($posts as $post)
         // {

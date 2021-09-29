@@ -7,8 +7,15 @@
     <form action="{{route('posts')}}" method="POST">
      @csrf
 
-         <div class="form-group">
-
+        <div class="form-group">
+            <select name="categories[]" id="" class="form-control">
+                <option value="">--Select Recipe Categories--</option>
+                @foreach ($categories as $category)
+                    <option value="{{$category->id}}">{{$category->category_name}}</option>
+                @endforeach
+            </select>
+        </div>
+         <div class="form-group">            
              <input type="text" name="title" id="" class="form-control @error('title') border border-danger @enderror" placeholder="Title">
              @error('title')
                 <div class="text-danger mt-2">

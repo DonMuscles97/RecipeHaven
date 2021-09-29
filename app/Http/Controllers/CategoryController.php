@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -78,7 +79,7 @@ class CategoryController extends Controller
             
         }
 
-        dd('done');
+        return redirect()->route('categories');
     }
 
     /**
@@ -89,7 +90,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $posts = Category::find($id)->posts;
+        dd($posts);
     }
 
     /**

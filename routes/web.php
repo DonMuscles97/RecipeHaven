@@ -41,6 +41,8 @@ Route::get('/categoryImage/{id}', [FileController::class, 'CategoryImage']);
 Route::get('/createCategory', [CategoryController::class, 'create'])->name('createCategory');
 Route::post('/createCategory', [CategoryController::class, 'store']);
 
+Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category');
+
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 
 
