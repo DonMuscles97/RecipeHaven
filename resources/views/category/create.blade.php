@@ -58,6 +58,10 @@
 
     
  </div>
+
+ <style>
+     
+ </style>
  <script src="{{ asset('js/app.js') }}"></script>   
  <link href="{{  URL::asset('plugins/dropzone/dropzone.min.css') }}" rel="stylesheet">
  {{-- @push('scripts') --}}
@@ -72,7 +76,7 @@ var uploads = [];
 $("div#upload").dropzone({ 
   url: "/temp", 
   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-  maxFilesize: 3,
+  maxFilesize: 5,
         init: function(e) {
 			
             this.on("success", function(file, response) {

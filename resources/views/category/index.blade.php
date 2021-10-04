@@ -8,7 +8,7 @@
         
             <div class="col-md-3" >
                 <a href="/category/{{$category->id}}">
-                <img src="/categoryImage/{{$category->id}}" alt="" width="100%">
+                <img class="cat-image" src="/categoryImage/{{$category->id}}" alt="" width="100%">
                 <div style="border: solid 2px black">
                     <h3>{{$category->category_name}}</h3>
                 <p>{{$category->description}}</p>
@@ -20,6 +20,11 @@
         @endforeach
        </div>
     </div>
+    <style>
+        .cat-image{
+            height: 300px;
+        }
+    </style>
 {{-- </div> --}}
 
 <script src="{{ asset('js/app.js') }}"></script>

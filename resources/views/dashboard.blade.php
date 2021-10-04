@@ -37,8 +37,23 @@
   </div>
     </div>
 
-    <div class="container bg-white pt-5  pb-2 col-md-10 col-lg-8 col-xl-8 col-xs-2 mx-auto rounded border" style="margin-top: 20px">
-        <h1 class="" style="color: #49ac39">User Submitted Recipes</h1>
+    <div class="container" style="margin-top: 20px;">
+        <div class="col-lg-9 mx-auto">
+            <div class="row">
+                @foreach ($categories as $category)
+            <div class="col-md-2 text-center">
+                <a href="/category/{{$category->id}}" class="text-center">
+                    <img src="/categoryImage/{{$category->id}}" alt="" width="100%"  class="text-center cat-image">
+                    <p class="text-center">{{$category->category_name}}</p>
+                </a>
+            </div>
+        @endforeach
+            </div>
+        </div>
+    </div>
+
+    <div class="container bg-white pt-5  pb-2 col-md-10 col-lg-10 col-xl-10 col-xs-2 mx-auto rounded border" style="margin-top: 20px">
+        <h1 class="" style="color: #49ac39">Most Recent Recipes</h1>
     
         
     
@@ -49,7 +64,7 @@
                     
                     @if(!empty($post->images))
                         @foreach ($post->images as $image)
-                        <img src="/download/{{$image['id']}}" alt="" width="100%">
+                        <img src="/download/{{$image['id']}}" alt="" width="100%" class="post-image">
                             {{-- <p></p> --}}
                         @endforeach
                     @endif
@@ -71,6 +86,20 @@
      </div>
 
     <style>
+
+        .post-image{
+            height: 300px;
+        }
+
+        .cat-image{
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            text-align: center !important;
+            margin: 0 auto !important;
+            object-fit: cover
+        }
+
         .btn-green{
             background: #49ac39;
             color: white
@@ -197,7 +226,7 @@
 
     </style>
     <script src="{{ asset('js/app.js') }}"></script>
-    {{-- <script>
+    <script>
          $.ajax({
 					url:  "https://api.spoonacular.com/recipes/random?number=10&apiKey=175acb5bb1e7452d8a36bc1615908948",
 					type: 'get',
@@ -208,7 +237,7 @@
             // document.location.href = '/'
 					}
 				})
-    </script> --}}
+    </script>
     <script>
         console.log($('exampleModal'))
     </script>

@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Storage;
 class CategoryController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware(['auth']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth']);
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = auth()->user()->categories;
+        $categories = Category::all();
         // dd($categories);
 
         return view('category.index')->with(['categories' => $categories]);
@@ -33,7 +33,17 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        $user = auth()->user();
+
+        if (!empty($user))
+        {
+            return view('category.create');
+        }
+        else
+        {
+            return view('auth.login');
+        }
+        
     }
 
     /**

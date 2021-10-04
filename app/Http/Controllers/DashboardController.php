@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,10 @@ class DashboardController extends Controller
         //     dd($post->images[0]->id);
         // }
 
-        return view('dashboard')->with(['posts' => $posts]);
+        $categories = Category::all();
+
+        // dd($categories);
+
+        return view('dashboard')->with(['posts' => $posts, 'categories' => $categories]);
     }
 }

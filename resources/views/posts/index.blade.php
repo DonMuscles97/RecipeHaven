@@ -8,8 +8,8 @@
      @csrf
 
         <div class="form-group">
-            <select name="categories[]" id="" class="form-control">
-                <option value="">--Select Recipe Categories--</option>
+            <select name="categories[]" id="" class="form-control chosen-select" multiple data-placeholder="Select a Category">
+                {{-- <option value="">--Select Recipe Categories--</option> --}}
                 @foreach ($categories as $category)
                     <option value="{{$category->id}}">{{$category->category_name}}</option>
                 @endforeach
@@ -32,6 +32,25 @@
                  {{$message}}
              </div>
          @enderror 
+         </div>
+         <div class="form-group">
+             <h3>Instructions</h3>
+             <div id="instructions">
+                 <div class="row">
+                     <div class="col-md-1" style="text-align: right">
+                         <p>1. </p>
+                     </div>
+                     <div class="col-md-10">
+                        <input type="text" class="form-control" name="instructions[]">
+                    </div>
+                    <div class="col-md-1">
+                        <span class="material-icons-outlined">
+                            add_circle_outline
+                            </span>
+                    </div>
+                 </div>
+             </div>
+
          </div>
          <div id="upload" class="dropzone filedrop @error('uploads') border border-danger @enderror">
             {{csrf_field()}}
@@ -68,11 +87,16 @@
  </div>
  <script src="{{ asset('js/app.js') }}"></script>   
  <link href="{{  URL::asset('plugins/dropzone/dropzone.min.css') }}" rel="stylesheet">
+ <link href="{{  URL::asset('plugins/chosen/chosen.min.css') }}" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  {{-- @push('scripts') --}}
  <script src="{{ URL::asset('plugins/dropzone/dropzone.min.js') }}"></script>
+ <script src="{{ URL::asset('plugins/chosen/chosen.jquery.js') }}"></script>
  
 
  <script>
+
+$(".chosen-select").chosen(); 
 
 console.log($('#upload'))
 var upload_number = 0;
