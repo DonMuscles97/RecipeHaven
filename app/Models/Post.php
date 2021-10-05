@@ -12,6 +12,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
+        'instructions',
+        'ingredients'
     ];
 
     public function user ()

@@ -25,10 +25,17 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+
+        $instructions = json_encode($request->instructions);
+        $ingredients = json_encode($request->ingredients);
+
+        // dd($instructions);
         $this->validate($request, [
           
             'title' => 'required',
             'body' => 'required',
+            'instructions' => 'required',
+            'ingredients' => 'required',
             'uploads' => 'required'
 
 
@@ -37,6 +44,8 @@ class PostController extends Controller
         $post = $request->user()->posts()->create([
             'title' => $request->title,
             'body'  => $request->body,
+            'instructions' => $instructions,
+            'ingredients' => $ingredients
         ]);
 
         foreach($request->categories as $category)
