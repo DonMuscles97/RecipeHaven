@@ -53,7 +53,7 @@
     </div>
 
     <div class="container bg-white pt-5  pb-2 col-md-10 col-lg-10 col-xl-10 col-xs-2 mx-auto rounded border" style="margin-top: 20px">
-        <h1 class="" style="color: #49ac39">Most Recent Recipes</h1>
+        <h1 class="" style="color: #49ac39">More Recipes!</h1>
     
         
     
@@ -63,13 +63,10 @@
                 <div class="mb-2 col-lg-4">
                     
                     @if(!empty($post->images))
-                        @foreach ($post->images as $image)
-                        <img src="/download/{{$image['id']}}" alt="" width="100%" class="post-image">
-                            {{-- <p></p> --}}
-                        @endforeach
+                        <img src="/download/{{$post->images[0]['id']}}" alt="" width="100%" class="post-image">
                     @endif
-                    <h3>{{$post->title}}</h3>
-                    <p>{{$post->body}}</p>
+                    <h4>{{$post->title}}</h4>
+                    {{-- <p>{{$post->body}}</p> --}}
                     
                     <small>Created by: {{$post->user->username}} - {{$post->created_at->diffForHumans()}}</small>
                     
@@ -84,6 +81,17 @@
             <p>Go create some recipes!</p>
          @endif
      </div>
+
+     <div class="container bg-white pt-5  pb-2 col-md-10 col-lg-10 col-xl-10 col-xs-2 mx-auto rounded border" style="margin-top: 20px">
+        <h1 class="" style="color: #49ac39">Most Recipes</h1>
+        <div class="row" id="recipes">
+
+        </div>
+    
+        
+     </div>
+
+     
 
     <style>
 
@@ -228,17 +236,33 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
          $.ajax({
-					url:  "https://api.spoonacular.com/recipes/random?number=10&apiKey=175acb5bb1e7452d8a36bc1615908948",
+					url:  "https://api.spoonacular.com/recipes/random?number=12&apiKey=175acb5bb1e7452d8a36bc1615908948",
 					type: 'get',
 					dataType: 'json',
 					data: {_token : "{{ csrf_token() }}", },
 					success: function(res) {
-						// alert(res.alert)
-            // document.location.href = '/'
+						res.recipes.forEach((item) => {
+                            console.log(item)
+                            var recipe = document.createElement('div');
+                            recipe.classList.add('mb-2')
+                            recipe.classList.add('col-lg-3')
+                            var html = 
+                                `                                                    
+                                    <a href="/externalRecipe/${item.id}">
+                                        <img src="${item.image}" alt="" width="100%" class="">                                    
+                                        <h4>${item.title}</h4>  
+                                    </a>                                                                                                      
+                                    
+                                    
+                                `
+
+                                recipe.innerHTML = html;
+                                document.getElementById('recipes').appendChild(recipe);
+                        })
 					}
 				})
     </script>
     <script>
-        console.log($('exampleModal'))
+        
     </script>
 @endsection

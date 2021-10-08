@@ -9,17 +9,29 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth']);
+    // }
 
     public function index()
     {
-        $categories = Category::all();
+
+        $user = auth()->user();
+
+        if (!empty($user))
+        {
+            $categories = Category::all();
+            return view('posts.index')->with(['categories' => $categories]);
+        }
+        else
+        {
+            return view('auth.login');
+        }
+        
         // dd($categories);
        
-        return view('posts.index')->with(['categories' => $categories]);
+        
     }
 
     public function store(Request $request)
@@ -50,17 +62,17 @@ class PostController extends Controller
 
         foreach($request->categories as $category)
         {
-            // dd($category);
+            
             $post->categories()->attach($post->id, [
-                // 'post_id' => $post->id,
+                
                 'category_id' => $category
             ]);
-            // dd('done');
+            
         }
 
         
 
-        // dd();
+        
 
         foreach(json_decode($request->uploads) as $upload){
             
@@ -93,13 +105,37 @@ class PostController extends Controller
         }
 
         public function showPosts()
-        {
-            
-            // $posts = Post::orderBy('created_at', 'DESC')->simplePaginate(5);
+        {                       
+
+            $user = auth()->user();
+
+            if (!empty($user))
+            {
+                 // $posts = Post::orderBy('created_at', 'DESC')->simplePaginate(5);
             $posts = auth()->user()->posts->sortByDesc('created_at');
             // $posts->created_at = date("m/d/y h:iA", strtotime($posts->created_at));
             // dd($posts);
             return view('posts.posts', ['posts' => $posts]);
+            }
+            else
+            {
+                return view('auth.login');
+            }
+        }
+
+        public function Post($id)
+        {
+            $post = Post::find($id);
+            // dd($post);
+
+            return view('posts.post')->with(['post' => $post]);
+        }
+
+        public function ExternalRecipe($id)
+        {
+            // dd($id);
+
+            return view('posts.external')->with(['id' => $id]);
         }
 
         

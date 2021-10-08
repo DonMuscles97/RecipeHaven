@@ -33,6 +33,9 @@ Route::get('/createPost', [PostController::class, 'index'])->name('createPost');
 Route::post('/posts', [PostController::class, 'store']);
 Route::get('/posts', [PostController::class, 'showPosts'])->name('posts');
 
+Route::get('/post/{id}', [PostController::class, 'Post'])->name('post');
+Route::get('/externalRecipe/{id}', [PostController::class, 'ExternalRecipe'])->name('externalRecipe');
+
 Route::post('/temp', [FileController::class, 'TempUpload'])->name('temp');
 Route::get('/download/{id}', [FileController::class, 'download'])->name('download');
 

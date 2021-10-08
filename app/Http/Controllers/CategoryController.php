@@ -100,8 +100,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $posts = Category::find($id)->posts;
-        dd($posts);
+        $category = Category::find($id);
+        $posts = $category->posts;
+        // dd($category);
+
+        return view('category.category')->with(['posts' => $posts, 'category' => $category]);
     }
 
     /**
