@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="" style="margin-top: -30px">
-        <img src="{{ asset('img/recipe.png') }}" width="100%">
+        <img src="{{ asset('img/recipe.png') }}" width="100%" id="main-pic">
         <div class="carousel-caption">
             <h1 class="display-2 text-dark text-left">Recipe Haven</h1>
             <h3 class="text-dark text-left"><strong>For recipes and so much more...</strong></h3>
@@ -53,15 +53,16 @@
     </div>
 
     <div class="container bg-white pt-5  pb-2 col-md-10 col-lg-10 col-xl-10 col-xs-2 mx-auto rounded border" style="margin-top: 20px">
-        <h1 class="" style="color: #49ac39">More Recipes!</h1>
+        <h1 class="" style="color: #49ac39">Recent Recipes!</h1>
     
         
     
          @if ($posts->count())
             <div class="row">
                 @foreach ($posts as $post)
-                <div class="mb-2 col-lg-4">
-                    
+                
+                <div class="mb-2 col-lg-3">
+                    <a href="/post/{{$post->id}}">
                     @if(!empty($post->images))
                         <img src="/download/{{$post->images[0]['id']}}" alt="" width="100%" class="post-image">
                     @endif
@@ -69,7 +70,7 @@
                     {{-- <p>{{$post->body}}</p> --}}
                     
                     <small>Created by: {{$post->user->username}} - {{$post->created_at->diffForHumans()}}</small>
-                    
+                    </a>
                     
                 </div>
             @endforeach
@@ -83,7 +84,7 @@
      </div>
 
      <div class="container bg-white pt-5  pb-2 col-md-10 col-lg-10 col-xl-10 col-xs-2 mx-auto rounded border" style="margin-top: 20px">
-        <h1 class="" style="color: #49ac39">Most Recipes</h1>
+        <h1 class="" style="color: #49ac39">More Recipes!</h1>
         <div class="row" id="recipes">
 
         </div>
@@ -94,6 +95,8 @@
      
 
     <style>
+
+
 
         .post-image{
             height: 300px;
@@ -228,7 +231,27 @@
 
     @media (max-width: 576px)
     {
+        #main-pic {
+        /* width: 100%; */
+        height: 200px;
+    }
 
+        .carousel-caption{
+            top: 38%;
+        }
+
+        .carousel-caption h1 {
+            font-size: 250%;
+        }
+
+        .carousel-caption h3 {
+            font-size: 110%;
+        }
+
+        .carousel-caption .btn {
+            font-size: 90%;
+            padding: 4px 8px;
+        }
     }
 
 

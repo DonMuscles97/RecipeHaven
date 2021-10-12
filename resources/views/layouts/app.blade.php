@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Blog</title>
+    <title>Recipe Haven</title>
 </head>
 <body class="top-space bg-light">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -63,6 +63,8 @@
 </body>
 
 <style>
+
+a { color: inherit; } 
 
     .top-space{
       padding-top: 80px;

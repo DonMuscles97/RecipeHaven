@@ -7,36 +7,22 @@
     
 
      @if ($posts->count())
+     <div class="row">
         @foreach ($posts as $post)
-            <div class="mb-2">
-                <h3>{{$post->title}}</h3>
-                @if(!empty($post->images))
-                    @foreach ($post->images as $image)
-                    <img src="/download/{{$image['id']}}" alt="" width="100%">
-                        {{-- <p></p> --}}
-                    @endforeach
-                @endif
-                <p>{!!html_entity_decode($post->body)!!}</p>
-                {{-- <div class="row p-2">
-                    <div class="m-1">
-                        <form action="" method="">
-                            @csrf
-                            <button  class="btn btn-success" type="submit">{{$post->likes->count()}} {{Str::plural('like', $post->likes->count())}}</button>
-                        </form>
-                    </div>
-                    <div class="m-1">
-                        <form action="" method="">
-                            @csrf
-                            <button  class="btn btn-danger" type="submit">Dis</button>
-                        </form>
-                    </div>
-                </div> --}}
-                
-                <small>Created by: {{$post->user->username}} - {{$post->created_at->diffForHumans()}}</small>
-                
-                
-            </div>
+        <div class="mb-2 col-lg-3">
+            <a href="/post/{{$post->id}}">
+            @if(!empty($post->images))
+                <img src="/download/{{$post->images[0]['id']}}" alt="" width="100%" class="post-image">
+            @endif
+            <h4>{{$post->title}}</h4>
+            {{-- <p>{{$post->body}}</p> --}}
+            
+            <small>Created by: {{$post->user->username}} - {{$post->created_at->diffForHumans()}}</small>
+            </a>
+            
+        </div>
         @endforeach
+    </div>
         <div class="col-md-12">
            {{-- <span>{{$posts->links()}}</span>  --}}
         </div>
@@ -56,6 +42,10 @@
         border: solid 1px #49ac39;
         color: #49ac39
     }
+
+    .post-image{
+            height: 300px;
+        }
 </style>
 <script src="{{ asset('js/app.js') }}"></script>   
 @endsection

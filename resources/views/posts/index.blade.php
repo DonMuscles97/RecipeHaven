@@ -37,14 +37,14 @@
             <h3>Ingredients</h3>
             <div id="ingredients">
                 <div class="row item">
-                    <div class="col-md-1" style="text-align: right">
+                    <div class="col-1 col-md-1 mobile-left" style="text-align: right">
                         <p>1. </p>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-10 col-md-9 ">
                        <input type="text" class="form-control" name="ingredients[]">
                    </div>
-                   <div class="col-md-2">
-                       <i class="material-icons text-primary add-item" style="">add_circle_outline</i>
+                   <div class="col-11 col-md-2 ">
+                       <i class="material-icons text-primary add-item mobile-right" style="">add_circle_outline</i>
                        
                    </div>
                 </div>
@@ -55,14 +55,14 @@
              <h3>Instructions</h3>
              <div id="instructions">
                  <div class="row step">
-                     <div class="col-md-1" style="text-align: right">
+                     <div class="col-md-1 mobile-left col-1" style="text-align: right; border: black 2px">
                          <p>1. </p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-9 col-10">
                         <input type="text" class="form-control" name="instructions[]">
                     </div>
-                    <div class="col-md-2">
-                        <i class="material-icons text-primary add-step" style="">add_circle_outline</i>
+                    <div class="col-md-2 col-11">
+                        <i class="material-icons text-primary add-step mobile-right" style="">add_circle_outline</i>
                         
                     </div>
                  </div>
@@ -108,6 +108,29 @@
      .add-step, .subtract-step, .add-item, .subtract-item{
          cursor: pointer;
      }
+
+     .hack-mobile{
+         display: none !important
+     }
+
+     @media (max-width: 576px)
+    {
+        .mobile-left{
+            text-align: left !important
+        }
+
+        .mobile-right{
+            float: right !important
+        }
+
+        .hack-desktop{
+            display: none !important
+            
+        }
+        .hack-mobile{
+            display: block !important
+        }
+    }
      
  </style>
  <script src="{{ asset('js/app.js') }}"></script>   
@@ -154,15 +177,17 @@ $(document).on('click', '.subtract-item', (e) => {
         row.classList.add('row');
         row.classList.add('item');
         row.style.marginTop = '10px'
-        row.innerHTML = `<div class="col-md-1" style="text-align: right">
+        row.innerHTML = `<div class="col-md-1 mobile-left col-1" style="text-align: right">
                          <p>${item_number}.</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-9 col-10">
                         <input type="text" class="form-control" name="ingredients[]">
                     </div>
-                    <div class="col-md-2">
-                        <i class="material-icons text-primary add-item" style="">add_circle_outline</i>
-                        <i class="material-icons subtract-item" style="color: crimson">remove_circle_outline</i>
+                    <div class="col-md-2 col-11">
+                        <i class="material-icons text-primary add-item mobile-right hack-desktop" style="">add_circle_outline</i>
+                        <i class="material-icons subtract-item mobile-right" style="color: crimson">remove_circle_outline</i>
+                        <i class="material-icons text-primary add-item mobile-right hack-mobile" style="">add_circle_outline</i>
+                        
                     </div>`
 
         document.getElementById('ingredients').appendChild(row)
@@ -179,15 +204,16 @@ $(document).on('click', '.subtract-item', (e) => {
         row.classList.add('row');
         row.classList.add('step');
         row.style.marginTop = '10px'
-        row.innerHTML = `<div class="col-md-1" style="text-align: right">
+        row.innerHTML = `<div class="col-md-1 mobile col-1" style="text-align: right">
                          <p>${step_number}.</p>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-9 col-10">
                         <input type="text" class="form-control" name="instructions[]">
                     </div>
-                    <div class="col-md-2">
-                        <i class="material-icons text-primary add-step" style="">add_circle_outline</i>
-                        <i class="material-icons subtract-step" style="color: crimson">remove_circle_outline</i>
+                    <div class="col-md-2 col-11">
+                        <i class="material-icons text-primary add-step mobile-right hack-desktop" style="">add_circle_outline</i>
+                        <i class="material-icons subtract-step mobile-right" style="color: crimson">remove_circle_outline</i>
+                        <i class="material-icons text-primary add-step mobile-right hack-mobile" style="">add_circle_outline</i>                        
                     </div>`
 
         document.getElementById('instructions').appendChild(row)
