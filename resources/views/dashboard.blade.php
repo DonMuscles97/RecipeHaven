@@ -41,7 +41,7 @@
         <div class="col-lg-9 mx-auto">
             <div class="row">
                 @foreach ($categories as $category)
-            <div class="col-md-2 text-center">
+            <div class="col-md-2 col-4 text-center">
                 <a href="/category/{{$category->id}}" class="text-center">
                     <img src="/categoryImage/{{$category->id}}" alt="" width="100%"  class="text-center cat-image">
                     <p class="text-center">{{$category->category_name}}</p>
@@ -201,9 +201,11 @@
     }
 
     /* *****Media Queries**** */
-    @media (max-width: 992px)
+    @media (max-width: 1024px)
     {
-
+        .carousel-caption {
+        top: 50%;
+    }
     }
 
     @media (max-width: 768px)
@@ -237,7 +239,8 @@
     }
 
         .carousel-caption{
-            top: 38%;
+            top: 20%;
+            height: 200px;
         }
 
         .carousel-caption h1 {

@@ -63,7 +63,7 @@ class FileController extends Controller
 
     public function TempUpload(Request $request)
     {
-        //  dd($request);
+        //  dd($request->files);
 
          foreach($request->files as $file)
          {

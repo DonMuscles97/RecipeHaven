@@ -25,8 +25,8 @@
     #head-image{
         border: solid 1px #eee; 
         padding: 10px;
-        width: 400px;
-        height: 400px;
+        /* width: 400px;
+        height: 400px; */
         object-fit: cover;
     }
 </style>

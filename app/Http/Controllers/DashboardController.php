@@ -30,6 +30,8 @@ class DashboardController extends Controller
 
         // dd($categories);
 
+        // phpinfo();
+
         return view('dashboard')->with(['posts' => $posts, 'categories' => $categories]);
     }
 }
